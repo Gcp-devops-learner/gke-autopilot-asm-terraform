@@ -27,6 +27,7 @@ following project roles:
 - roles/container.clusterAdmin
 - roles/container.developer
 - roles/iam.serviceAccountAdmin
+- roles/iam.serviceAccountUser
 - roles/resourcemanager.projectIamAdmin 
 
 ### Creating a cluster in shared VPC
@@ -38,5 +39,5 @@ In order to operate with the Service Account you must activate the following API
 - Cloud Resource Manager API - cloudresourcemanager.googleapis.com
 - Compute Engine API - compute.googleapis.com
 - Kubernetes Engine API - container.googleapis.com
-- Mesh Confuiguration API -  Meshconfig.googleapis.com 
+- Mesh Confuiguration API -  meshconfig.googleapis.com 
 - GKE Hub API - gkehub.googleapis.com
