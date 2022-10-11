@@ -36,7 +36,7 @@ Google Kubernetes Engine service account should be assigned the Kubernetes Engin
 
 ### Enable APIs
 In order to operate with the Service Account you must activate the following APIs on the project where the Service Account was created:
-
+- Cloud Resource Manager API - cloudresourcemanager.googleapis.com
 - Compute Engine API - compute.googleapis.com
 - Kubernetes Engine API - container.googleapis.com
 - Mesh Confuiguration API -  Meshconfig.googleapis.com 
