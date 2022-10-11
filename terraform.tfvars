@@ -9,7 +9,12 @@ maintenance_start_time       = "2022-10-07T00:00:00Z"
 maintenance_end_time         = "2022-10-07T05:00:00Z"
 maintenance_recurrence	     = "FREQ=WEEKLY;BYDAY=MO,TU,WE,TH"
 network_project_id           = "trinnex-host1"
-
+activate_apis = [
+  "cloudresourcemanager.googleapis.com",
+  "container.googleapis.com",
+  "meshconfig.googleapis.com",
+  "gkehub.googleapis.com"
+]
 
 master_authorized_networks=[
     {
