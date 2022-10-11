@@ -49,17 +49,18 @@ module "gke" {
   deploy_using_private_endpoint = true
   cluster_resource_labels = { "mesh_id" : "proj-${data.google_project.project.number}" }
   identity_namespace      = "${var.project_id}.svc.id.goog"
+  network_project_id     = var.network_project_id
   
 }
 
-module "asm" {
-  source                    = "terraform-google-modules/kubernetes-engine/google//modules/asm"
-  project_id                = var.project_id
-  cluster_name              = module.gke.name
-  cluster_location          = module.gke.location
-  multicluster_mode         = "connected"
-  enable_cni                = true
-  internal_ip               = true
-  enable_mesh_feature       = true
-  enable_fleet_registration = true
-}
+# module "asm" {
+#   source                    = "terraform-google-modules/kubernetes-engine/google//modules/asm"
+#   project_id                = var.project_id
+#   cluster_name              = module.gke.name
+#   cluster_location          = module.gke.location
+#   multicluster_mode         = "connected"
+#   enable_cni                = true
+#   internal_ip               = true
+#   enable_mesh_feature       = true
+#   enable_fleet_registration = true
+# }

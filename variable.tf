@@ -76,3 +76,9 @@ variable "maintenance_recurrence" {
     description = "Frequency of the recurring maintenance window in RFC5545 format"
     type =string
 }
+
+variable "network_project_id" {
+    description = "The project ID of the shared VPC's host (for shared vpc support)"
+    type =string
+    default= ""
+}
