@@ -27,7 +27,6 @@ following project roles:
 - roles/container.clusterAdmin
 - roles/container.developer
 - roles/iam.serviceAccountAdmin
-- roles/iam.serviceAccountUser
 - roles/resourcemanager.projectIamAdmin 
 
 ### Creating a cluster in shared VPC
