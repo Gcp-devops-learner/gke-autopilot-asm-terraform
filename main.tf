@@ -27,12 +27,12 @@ provider "kubernetes" {
   cluster_ca_certificate = base64decode(module.gke.ca_certificate)
 }
 
-module "project-services" {
-  source  = "terraform-google-modules/project-factory/google//modules/project_services"
-  version = "~> 13.0"
-  project_id    = var.project_id
-  activate_apis = var.activate_apis
-}
+# module "project-services" {
+#   source  = "terraform-google-modules/project-factory/google//modules/project_services"
+#   version = "~> 13.0"
+#   project_id    = var.project_id
+#   activate_apis = var.activate_apis
+# }
 
 module "gke" {
   source                          = "terraform-google-modules/kubernetes-engine/google//modules/beta-autopilot-private-cluster"
@@ -57,7 +57,6 @@ module "gke" {
   cluster_resource_labels = { "mesh_id" : "proj-${data.google_project.project.number}" }
   identity_namespace      = "${var.project_id}.svc.id.goog"
   network_project_id     = var.network_project_id
-  depends_on = [module.project-services]
 
   
 }
@@ -72,5 +71,4 @@ module "asm" {
   internal_ip               = true
   enable_mesh_feature       = true
   enable_fleet_registration = true
-  module_depends_on = [module.project-services]
 }
