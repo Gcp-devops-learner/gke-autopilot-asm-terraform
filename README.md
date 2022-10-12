@@ -42,4 +42,4 @@ In order to operate with the Service Account you must activate the following API
 - Mesh Confuiguration API -  meshconfig.googleapis.com 
 - GKE Hub API - gkehub.googleapis.com
 
-gcloud enable services cloudresourcemanager.googleapis.com compute.googleapis.com container.googleapis.com meshconfig.googleapis.com gkehub.googleapis.com
+```gcloud enable services cloudresourcemanager.googleapis.com compute.googleapis.com container.googleapis.com meshconfig.googleapis.com gkehub.googleapis.com ```
