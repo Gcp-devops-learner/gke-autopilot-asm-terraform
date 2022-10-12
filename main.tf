@@ -21,12 +21,9 @@ data "google_project" "project" {
   project_id = var.project_id
 }
 
-data "google_project" "host_project" {
-  project_id = var.network_project_id
-}
 
 locals {
-  kubernetes_sa = "service-${data.google_project.host_project.number}@container-engine-robot.iam.gserviceaccount.com"
+  kubernetes_sa = "service-${data.google_project.project.number}@container-engine-robot.iam.gserviceaccount.com"
 }
 
 resource "google_project_iam_member" "project" {
