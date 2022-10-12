@@ -82,9 +82,3 @@ variable "network_project_id" {
     type =string
     default= ""
 }
-
-# variable "activate_apis" {
-#   description = "The api to activate for the GCP project"
-#   type        = list(string)
-#   default     = []
-# }

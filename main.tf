@@ -21,18 +21,29 @@ data "google_project" "project" {
   project_id = var.project_id
 }
 
+data "google_project" "host_project" {
+  project_id = var.network_project_id
+}
+
+locals {
+  kubernetes_sa = "service-${data.google_project.host_project.number}@container-engine-robot.iam.gserviceaccount.com"
+}
+
+resource "google_project_iam_binding" "project" {
+  project = var.network_project_id
+  role    = "roles/container.serviceAgent"
+
+  members = [
+    "serviceAccount:${local.kubernetes_sa}",
+  ]
+}
+
 provider "kubernetes" {
   host                   = "https://${module.gke.endpoint}"
   token                  = data.google_client_config.default.access_token
   cluster_ca_certificate = base64decode(module.gke.ca_certificate)
 }
 
-# module "project-services" {
-#   source  = "terraform-google-modules/project-factory/google//modules/project_services"
-#   version = "~> 13.0"
-#   project_id    = var.project_id
-#   activate_apis = var.activate_apis
-# }
 
 module "gke" {
   source                          = "terraform-google-modules/kubernetes-engine/google//modules/beta-autopilot-private-cluster"
@@ -57,7 +68,9 @@ module "gke" {
   cluster_resource_labels = { "mesh_id" : "proj-${data.google_project.project.number}" }
   identity_namespace      = "${var.project_id}.svc.id.goog"
   network_project_id     = var.network_project_id
-
+  depends_on = [
+    resource.google_project_iam_binding.project
+  ]
   
 }
 
