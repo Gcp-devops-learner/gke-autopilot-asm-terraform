@@ -22,15 +22,15 @@ data "google_project" "project" {
 }
 
 
-locals {
-  kubernetes_sa = "service-${data.google_project.project.number}@container-engine-robot.iam.gserviceaccount.com"
-}
+# locals {
+#   kubernetes_sa = "service-${data.google_project.project.number}@container-engine-robot.iam.gserviceaccount.com"
+# }
 
-resource "google_project_iam_member" "project" {
-  project = var.network_project_id
-  role    = "roles/container.serviceAgent"
-  member = "serviceAccount:${local.kubernetes_sa}"
-}
+# resource "google_project_iam_member" "project" {
+#   project = var.network_project_id
+#   role    = "roles/container.serviceAgent"
+#   member = "serviceAccount:${local.kubernetes_sa}"
+# }
 
 provider "kubernetes" {
   host                   = "https://${module.gke.endpoint}"
@@ -62,9 +62,6 @@ module "gke" {
   cluster_resource_labels = { "mesh_id" : "proj-${data.google_project.project.number}" }
   identity_namespace      = "${var.project_id}.svc.id.goog"
   network_project_id     = var.network_project_id
-  depends_on = [
-    resource.google_project_iam_member.project
-  ]
   
 }
 
