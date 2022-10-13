@@ -32,7 +32,7 @@ following project roles:
 
 ### Creating a cluster in shared VPC
 Google Kubernetes Engine service account should be assigned the Kubernetes Engine Service Agent role on your host Project  
-`service-PROJECT_NUMBER@container-engine-robot.iam.gserviceaccount.com`
+`service-PROJECT_NUMBER@container-engine-robot.iam.gserviceaccount.com` where project number is the number of the service project
 
 ### Enable APIs
 In order to operate with the Service Account you must activate the following APIs on the project where the Service Account was created:
@@ -43,3 +43,5 @@ In order to operate with the Service Account you must activate the following API
 - GKE Hub API - gkehub.googleapis.com
 
 ```gcloud services enable  cloudresourcemanager.googleapis.com compute.googleapis.com container.googleapis.com meshconfig.googleapis.com gkehub.googleapis.com ```
+
+Container API also needs to be enabled on the host project.
