@@ -31,8 +31,14 @@ following project roles:
 - roles/resourcemanager.projectIamAdmin 
 
 ### Creating a cluster in shared VPC
-Google Kubernetes Engine service account should be assigned the Kubernetes Engine Service Agent role on your host Project  
-`service-PROJECT_NUMBER@container-engine-robot.iam.gserviceaccount.com` where project number is the number of the service project
+Google Kubernetes Engine service account of service project should be assigned the Kubernetes Engine Service Agent role on your host Project  
+
+```
+PROJECT_NUMBER=$(gcloud projects describe "SERVICE_PROJECT_ID" --format 'get(projectNumber)')
+gcloud projects add-iam-policy-binding HOST_PROJECT_ID \
+ --member "serviceAccount:service-${PROJECT_NUMBER?}@container-engine-robot.iam.gserviceaccount.com" \
+ --role roles/container.serviceAgent
+```
 
 ### Enable APIs
 In order to operate with the Service Account you must activate the following APIs on the project where the Service Account was created:
